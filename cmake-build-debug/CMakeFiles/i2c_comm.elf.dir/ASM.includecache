@@ -1,0 +1,10 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/DFUNDO/OneDrive/Documents/VRS/zadanie6_demo/vrs_cvicenie_6-demo_iks01a2/Startup/startup_stm32f303k8tx.s
+
