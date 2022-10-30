@@ -49,11 +49,11 @@ else ()
     add_compile_options(-Og -g)
 endif ()
 
-include_directories(Inc Drivers/CMSIS/Include Drivers/STM32F3xx_HAL_Driver/Inc Drivers/CMSIS/Device/ST/STM32F3xx/Include compass accelerometer)
+include_directories(Inc Drivers/CMSIS/Include Drivers/STM32F3xx_HAL_Driver/Inc Drivers/CMSIS/Device/ST/STM32F3xx/Include compass accelerometer humidity)
 
 add_definitions(-DEXTERNAL_CLOCK_VALUE=8000000 -DHSE_VALUE=8000000 -DHSE_STARTUP_TIMEOUT=100 -DDEBUG -DLSE_STARTUP_TIMEOUT=5000 -DLSE_VALUE=32768 -DVDD_VALUE=3300 -DLSI_VALUE=40000 -DHSI_VALUE=8000000 -DSTM32F303x8 -DUSE_FULL_LL_DRIVER -DPREFETCH_ENABLE=1)
 
-file(GLOB_RECURSE SOURCES "Drivers/*.*" "Src/*.*" "Startup/*.*" "accelerometer/*.*" "compass/*.*")
+file(GLOB_RECURSE SOURCES "Drivers/*.*" "Src/*.*" "Startup/*.*" "accelerometer/*.*" "compass/*.*" "humidity/*.*")
 
 set(LINKER_SCRIPT ${CMAKE_SOURCE_DIR}/STM32F303K8TX_FLASH.ld)
 

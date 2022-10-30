@@ -1,0 +1,40 @@
+//
+// Created by DFUNDO on 10/30/2022.
+//
+
+#ifndef I2C_COMM_HTS221_H
+#define I2C_COMM_HTS221_H
+
+
+#define HTS221_WHO_AM_I 0x0F
+#define HTS221_AVERAGE_CONF 0x10
+
+#define HTS221_AVERAGE_CONF_TEMPERATURE 0x13
+
+//*((volatile uint8_t *)((uint8_t)
+#define HTS221_AVERAGE_CONF_HUMIDITY 0x10
+
+
+
+#define HTS221_CONTROL_REG1 0x20
+
+#define HTS221_CONTROL_REG2 0x21
+
+#define HTS221_CONTROL_REG3 0x22
+
+
+
+#define HTS221_STATUS_REG 0x27
+#define HTS221_HUMIDITY_OUT_L 0x28
+#define HTS221_HUMIDITY_OUT_H 0x29
+#define HTS221_TEMP_OUT_L 0x2A
+#define HTS221_TEMP_OUT_H 0x2B
+
+
+
+
+
+
+
+
+#endif //I2C_COMM_HTS221_H
