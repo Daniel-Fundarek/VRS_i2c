@@ -53,7 +53,31 @@ uint16_t hts221_init() {
 
 }
 
-int16_t hts221_get_temp(float* temp) {
+void hts221_get_humidity(float* humidity){
+	uint8_t H0_rH_x2 = hts221_read_byte(HTS221_HUMIDITY_CAL_H0_RH);
+	uint8_t H1_rH_x2 = hts221_read_byte(HTS221_HUMIDITY_CAL_H1_RH);
+
+	int16_t H0_cal = hts221_read_byte(HTS221_HUMIDITY_CAL_H0_LSB);
+	H0_cal = (hts221_read_byte(HTS221_HUMIDITY_CAL_H0_MSB)<<8);
+
+	int16_t H1_cal = hts221_read_byte(HTS221_HUMIDITY_CAL_H1_LSB);
+	H1_cal = (hts221_read_byte(HTS221_HUMIDITY_CAL_H1_MSB)<<8);
+
+	int16_t H = hts221_read_byte(HTS221_HUMIDITY_OUT_LSB);
+	H = (hts221_read_byte(HTS221_HUMIDITY_OUT_MSB)<<8);
+
+	float k = (H1_rH_x2 - H0_rH_x2) / (float)(H1_cal - H0_cal);
+	float q = H1_rH_x2 - k * H1_cal;
+
+	*humidity = (k*H + q)/2.0f;
+
+
+
+}
+
+
+
+void hts221_get_temp(float* temp) {
     //uint8_t temp[2];
     //temp[0] = 0;
     //temp[1] = 0;

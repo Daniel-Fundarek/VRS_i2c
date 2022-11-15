@@ -8,6 +8,8 @@
 #ifndef LPS22HB_H_
 #define LPS22HB_H_
 
+#include "i2c.h"
+
 #define LPS22HB_DEVICE_ADDRESS 0xB9
 #define LPS22HB_DEVICE_ADDRESS1 0xBB
 
@@ -37,6 +39,9 @@
 #define LPS22HB_CTRL1_FREQUENCY_75HZ	(0x5 << 4)
 
 
-
-
+void lps22hb_readArray(uint8_t * data, uint8_t reg, uint8_t length);
+void lps22hb_write_byte(uint8_t reg_addr, uint8_t value);
+uint8_t lps22hb_read_byte(uint8_t reg_addr);
+uint16_t lps22hb_init();
+void get_pressure(float* pressure);
 #endif /* LPS22HB_H_ */

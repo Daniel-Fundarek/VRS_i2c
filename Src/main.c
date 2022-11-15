@@ -26,6 +26,7 @@
 #include "lis3mdltr.h"
 #include "lsm6ds0.h"
 #include "hts221.h"
+#include "lps22hb.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
@@ -63,8 +64,9 @@ int main(void)
       //hts221_get_temp(acc, (acc+1), (acc+2));
 	  hts221_get_temp(acc);
 	  hts221_get_humidity(acc+1);
+	  lps22hb_get_pressure(acc+2);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f [°C] %0.4f [%%]\r", acc[0], acc[1]);
+	  sprintf(formated_text, "%0.4f [°C] %0.4f [%%] %0.4f [Pa]\r", acc[0], acc[1], acc[2]);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }
