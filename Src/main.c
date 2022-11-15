@@ -56,6 +56,7 @@ int main(void)
 
   //lsm6ds0_init();
   hts221_init();
+  lps22hb_init();
 
   while (1)
   {
