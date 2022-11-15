@@ -34,7 +34,7 @@
 #define CHAR_BUFF_SIZE	30
 
 uint8_t temp = 0;
-float mag[3], acc[3];
+float mag[3], acc[4];
 char formated_text[30], value_x[10], value_y[10], value_z[10];
 
 void SystemClock_Config(void);
@@ -65,10 +65,10 @@ int main(void)
       //hts221_get_temp(acc, (acc+1), (acc+2));
 	  hts221_get_temp(acc);
 	  hts221_get_humidity(acc+1);
-	  lps22hb_get_temperature(acc+2);
-	  //lps22hb_get_pressure(acc+2);
+	  lps22hb_get_pressure(acc+2);
+	  lps22hb_get_height(acc+3);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f [°C] %0.4f [%%] %0.4f [Pa]\r", acc[0], acc[1], acc[2]);
+	  sprintf(formated_text, "%2.1f [°C] %3.0f [%%] %4.2f [hPa] %3.2f [m]\r", acc[0], acc[1], acc[2],acc[3]);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }

@@ -6,6 +6,7 @@
  */
 #include "lps22hb.h"
 #include <stdint-gcc.h>
+#include <math.h>
 
 uint8_t lps22hb_address = LPS22HB_DEVICE_ADDRESS;
 uint8_t lps22hb_read_byte(uint8_t reg_addr)
@@ -65,9 +66,14 @@ void lps22hb_get_temperature(float* temperature){
 	*temperature = t/100.0f;
 }
 void lps22hb_get_height(float* height ){
-	int p=0;
-	int T = 0;
-	int p0 = 1024;
-	//*height = (((p0/p)^(1/5.257)-1)*(T + 273.15))/0.0065;
+
+	float p=1;
+	float T = 0;
+	lps22hb_get_pressure(&p);
+	lps22hb_get_temperature(&T);
+
+	float p0 = 1013.25f;
+	*height = ((pow((p0/p),(1/5.257f))-1)*(T + 273.15f))/0.0065f;
+	//*height = (((p0/p)**(1/5.257f)-1)*(T + 273.15f))/0.0065f;
 }
 
