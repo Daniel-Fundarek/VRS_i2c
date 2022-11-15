@@ -62,8 +62,9 @@ int main(void)
 	  //lsm6ds0_get_acc(acc, (acc+1), (acc+2));
       //hts221_get_temp(acc, (acc+1), (acc+2));
 	  hts221_get_temp(acc);
+	  hts221_get_humidity(acc+1);
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f\r", acc[0]);
+	  sprintf(formated_text, "%0.4f [°C] %0.4f [%%]\r", acc[0], acc[1]);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }
