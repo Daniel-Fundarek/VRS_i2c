@@ -60,7 +60,10 @@ void lps22hb_get_pressure(float* pressure){
 	*pressure = p/4096.0f;
 }
 
-
+void lps22hb_get_temperature(float* temperature){
+	int16_t t = lps22hb_read_byte(LPS22HB_TEMP_OUT_L) | (lps22hb_read_byte(LPS22HB_TEMP_OUT_H)<<8);
+	*temperature = t/100.0f;
+}
 void lps22hb_get_height(float* height ){
 	int p=0;
 	int T = 0;
