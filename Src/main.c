@@ -26,6 +26,7 @@
 #include "lis3mdltr.h"
 #include "lsm6ds0.h"
 #include "hts221.h"
+#include "lps22hb.h"
 #include "stdio.h"
 #include "string.h"
 #include "dma.h"
@@ -33,8 +34,8 @@
 #define CHAR_BUFF_SIZE	30
 
 uint8_t temp = 0;
-float mag[3], acc[3];
-char formated_text[30], value_x[10], value_y[10], value_z[10];
+float mag[3], acc[5];
+char formated_text[100], value_x[10], value_y[10], value_z[10];
 
 void SystemClock_Config(void);
 
@@ -55,6 +56,7 @@ int main(void)
 
   //lsm6ds0_init();
   hts221_init();
+  lps22hb_init();
 
   while (1)
   {
@@ -63,8 +65,12 @@ int main(void)
       //hts221_get_temp(acc, (acc+1), (acc+2));
 	  hts221_get_temp(acc);
 	  hts221_get_humidity(acc+1);
+	  lps22hb_get_pressure(acc+2);
+	  lps22hb_get_height(acc+3);
+	  lps22hb_get_temperature(acc+4);
+
 	  memset(formated_text, '\0', sizeof(formated_text));
-	  sprintf(formated_text, "%0.4f [°C] %0.4f [%%]\r", acc[0], acc[1]);
+	  sprintf(formated_text, "teplota [°C]: %2.1f,  rel.vlhkost [%%]: %3.0f tlak vzduchu [hPa]: %4.2f  vyska [m]: %3.2f teplota %3.3f \r", acc[0], acc[1], acc[2],acc[3], acc[4]);
 	  USART2_PutBuffer((uint8_t*)formated_text, strlen(formated_text));
 	  LL_mDelay(10);
   }
