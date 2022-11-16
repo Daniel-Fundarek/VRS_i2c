@@ -29,7 +29,7 @@
 #define LPS22HB_TEMP_OUT_H 0x2C
 
 
-#define LPS22HB_CTRL1_RESET_REG			0xFF
+#define LPS22HB_CTRL1_RESET_REG			0x0
 #define LPS22HB_CTRL1_ENABLE_LOWPASS_FILT (0x1 << 3)
 #define LPS22HB_CTRL1_POWERDOWN 		(0x0 << 4)
 #define LPS22HB_CTRL1_FREQUENCY_1HZ 	(0x1 << 4)
@@ -43,5 +43,6 @@ void lps22hb_readArray(uint8_t * data, uint8_t reg, uint8_t length);
 void lps22hb_write_byte(uint8_t reg_addr, uint8_t value);
 uint8_t lps22hb_read_byte(uint8_t reg_addr);
 uint16_t lps22hb_init();
-void get_pressure(float* pressure);
+void lps22hb_get_pressure(float* pressure);
+void lps22hb_get_height(float* height);
 #endif /* LPS22HB_H_ */
